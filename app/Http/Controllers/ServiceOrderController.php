@@ -256,7 +256,7 @@ class ServiceOrderController extends Controller
         $order->load(['handymanServices', 'products', 'customer']);
 
         return Pdf::view('report-pdf.order-report',[ 'order' => $order ])
-            ->download('invoice-' . $order->id . '.pdf');
+            ->name('invoice-' . $order->id . '.pdf');
 
     }
 }

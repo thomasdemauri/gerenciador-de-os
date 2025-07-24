@@ -15,23 +15,25 @@
 </head>
 <body class="text-sm text-gray-900 p-8 font-sans">
 
-<!-- Cabeçalho da Empresa -->
-<div class="grid grid-cols-12 mb-8">
-    <!-- Logo -->
-    <div class="col-span-2">
-        <div class="w-40 h-240 border border-gray-400">
-            <img src="https://s3-sa-east-1.amazonaws.com/projetos-artes/fullsize%2F2021%2F04%2F30%2F16%2FLogo-275326_493335_163659722_1306160352.jpg">
+<div class="grid grid-cols-12 mb-8 items-center">
+    <div class="col-span-3">
+        <div class="w-full h-24 border border-gray-400 overflow-hidden flex items-center"> <!-- Altura fixa de 6rem (h-24) -->
+            <img
+                src="https://s3-sa-east-1.amazonaws.com/projetos-artes/fullsize%2F2021%2F04%2F30%2F16%2FLogo-275326_493335_163659722_1306160352.jpg"
+                class="w-full h-auto max-h-full object-contain"
+             alt="" >
         </div>
     </div>
 
     <!-- Dados da Empresa -->
-    <div class="col-span-10 pl-4">
+    <div class="col-span-9 pl-4">
         <h1 class="text-lg font-bold">Preto Motores</h1>
         <p class="text-sm">Preto Motores LTDA</p>
         <p class="text-sm">CNPJ: 15.329.731/0001-52</p>
         <p class="text-sm">Contato: (16) 3342-9507 | contato@empresa.com</p>
     </div>
 </div>
+
 
 <!-- Informações do Cliente -->
 <div class="grid grid-cols-4 gap-4 mb-4">
@@ -63,6 +65,8 @@
     <thead>
     <tr class="text-left">
         <th class="font-semibold">Descrição</th>
+        <th class="font-semibold text-right">Quantidade</th>
+        <th class="font-semibold text-right">Valor unitário</th>
         <th class="font-semibold text-right">Valor</th>
     </tr>
     </thead>
@@ -70,7 +74,9 @@
     @foreach($order->handymanServices as $service)
         <tr>
             <td>{{ $service->description }}</td>
-            <td class="text-right">R$ {{ number_format($service->price, 2, ',', '.') }}</td>
+            <td class="text-right">{{ number_format($service->quantity, 2, ',', '.') }}</td>
+            <td class="text-right">R$ {{ number_format($service->unit_price, 2, ',', '.') }}</td>
+            <td class="text-right">R$ {{ number_format($service->total_price, 2, ',', '.') }}</td>
         </tr>
     @endforeach
     </tbody>

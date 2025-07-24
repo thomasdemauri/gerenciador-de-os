@@ -1,5 +1,62 @@
 <x-app-layout>
 
+    <div class="p-4 m-4 bg-white ">
+        <h3 class="font-bold">Filtros<span class="text-sm text-gray-500 ml-3">Você pode usar mais de um filtro por consulta</span></h3>
+        <form action="{{route('service.index')}}" method="get">
+            <div class="grid grid-cols-12 gap-5">
+
+                {{-- Nome do cliente --}}
+                <div class="col-span-3 mt-4">
+                    <label for="customer_name" class="block text-sm font-medium text-gray-700">Filtrar por nome ou apelido</label>
+                    <input type="text" id="customer_name" name="filter[customer]"
+                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                           value="{{ request('filter.customer') }}"
+                    >
+                </div>
+
+                {{-- Veiculo --}}
+                <div class="col-span-2 mt-4">
+                    <label for="vehicle" class="block text-sm font-medium text-gray-700">Filtrar por veículo</label>
+                    <input type="text" id="vehicle" name="filter[vehicle]" value="{{ request('filter.vehicle', '') }}"
+                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                    >
+                </div>
+
+                {{-- Data --}}
+                <div class="col-span-2 mt-4">
+                    <label for="data_os" class="block text-sm font-medium text-gray-700">Filtrar por data</label>
+                    <input type="text" id="data_os" name="filter[data]"
+                           value="{{ request('filter.data', '')}}"
+                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    >
+                </div>
+
+                {{-- Situação da ordem de serviço --}}
+                <div class="col-span-4 mt-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Situação da O.S</label>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        @foreach(\App\Http\Enums\ServiceOrderStatusEnum::values() as $status)
+                            <label class="flex items-center space-x-2">
+                                <input
+                                    type="checkbox"
+                                    name="filter[status][]"
+                                    value="{{ $status }}"
+                                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
+                                    {{ in_array($status, request('filter.status', [])) ? 'checked' : '' }}
+                                >
+                                <span>{{ $status }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+
+            </div>
+            <button type="submit" class="mt-4 inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-white hover:bg-indigo-700">
+                Filtrar
+            </button>
+        </form>
+    </div>
+
     <div class="p-4">
         <div class="overflow-x-auto">
             <table class="min-w-full table-auto border border-gray-200">

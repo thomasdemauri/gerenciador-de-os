@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\CustomerNameFilter;
+use App\Filters\DataOsFilter;
 use App\Models\Customer;
 use App\Models\HandymanService;
 use App\Models\ProductService;
@@ -11,6 +13,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Spatie\LaravelPdf\Facades\Pdf;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ServiceOrderController extends Controller
 {
@@ -145,11 +149,21 @@ class ServiceOrderController extends Controller
         }
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
 
-        $orders = ServiceOrder::with('customer')->where('user_id', $user->id)->get();
+//        $orders = ServiceOrder::with('customer')->where('user_id', $user->id)->get();
+        $orders = QueryBuilder::for(ServiceOrder::class)
+            ->allowedFilters([
+                AllowedFilter::custom('customer', new CustomerNameFilter),
+                AllowedFilter::exact('status'),
+                AllowedFilter::partial('vehicle'),
+                AllowedFilter::custom('data', new DataOsFilter()),
+            ])
+            ->where('user_id', $user->id)
+            ->with('customer')
+            ->get();
 
         return view('service-order.index', compact('orders'));
     }

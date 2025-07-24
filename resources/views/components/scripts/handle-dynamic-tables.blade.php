@@ -34,8 +34,8 @@
         >
     </td>
     <td class="flex">
-        <button type="button" class="btn-remove-row ml-2 text-red-500">Excluir</button>
-        <button type="button" class="btn-edit-service-row ml-2 mr-2 text-blue-500">Alterar</button>
+        <button type="button" class="btn-edit-product-row ml-2 text-blue-500">Alterar</button>
+        <button type="button" class="btn-remove-row ml-2 mr-2 text-red-500">Excluir</button>
     </td>
 </tr>
         `;

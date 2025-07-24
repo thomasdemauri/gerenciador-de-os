@@ -15,7 +15,7 @@
 </head>
 <body class="text-sm text-gray-900 p-8 font-sans">
 
-<div class="grid grid-cols-12 mb-8 items-center">
+<div class="grid grid-cols-12 mb-4 items-center">
     <div class="col-span-3">
         <div class="w-full h-24 border border-gray-400 overflow-hidden flex items-center"> <!-- Altura fixa de 6rem (h-24) -->
             <img
@@ -34,6 +34,9 @@
     </div>
 </div>
 
+<div class="text-center mb-3">
+    <p class="font-bold">ORDEM DE SERVIÇO</p>
+</div>
 
 <!-- Informações do Cliente -->
 <div class="grid grid-cols-4 gap-4 mb-4">
@@ -50,7 +53,7 @@
         <p>{{ \Carbon\Carbon::parse($order->data_os)->format('d/m/Y') }}</p>
     </div>
     <div>
-        <label class="block font-semibold">Código OS:</label>
+        <label class="block font-semibold">Número OS:</label>
         <p>{{ $order->id }}</p>
     </div>
     <div class="col-span-3">

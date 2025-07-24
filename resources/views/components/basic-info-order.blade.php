@@ -27,7 +27,7 @@
         </select>
     </div>
 
-    <div class="col-span-1">
+    <div class="col-span-2">
         <label for="created_at" class="block text-sm font-medium text-gray-700">Data</label>
         <input type="date" id="created_at" name="data_os"
                value="{{ $order ? $order->data_os : \Carbon\Carbon::now()->format('Y-m-d') }}"

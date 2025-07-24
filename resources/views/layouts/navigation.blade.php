@@ -12,21 +12,55 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('service.create')" :active="request()->routeIs('service.create')">
-                        Nova O.S
-                    </x-nav-link>
-                    <x-nav-link :href="route('service.index')" :active="request()->routeIs('service.index')">
-                        Ver O.S
-                    </x-nav-link>
-                    <x-nav-link :href="route('customer.index')" :active="request()->routeIs('customer.index')">
-                        Clientes
-                    </x-nav-link>
-                    <x-nav-link :href="route('customer.create')" :active="request()->routeIs('customer.create')">
-                        Novo Cliente
-                    </x-nav-link>
+                        <!-- Dropdown ajustado para integrar com o layout -->
+                        <div class="flex items-center">
+
+                            <x-dropdown>
+                                <x-slot name="trigger">
+                                    <button class="inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                        <div>Ordem de Serviço</div>
+                                        <div class="ms-1">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                </x-slot>
+
+                                <x-slot name="content">
+                                    <x-dropdown-link :href="route('service.create')">
+                                        Nova O.S
+                                    </x-dropdown-link>
+                                    <x-dropdown-link :href="route('service.index')">
+                                        Ver lançamentos
+                                    </x-dropdown-link>
+                                </x-slot>
+                            </x-dropdown>
+
+                            <x-dropdown>
+                                <x-slot name="trigger">
+                                    <button class="inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                        <div>Clientes</div>
+                                        <div class="ms-1">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                </x-slot>
+
+                                <x-slot name="content">
+                                    <x-dropdown-link :href="route('customer.create')">
+                                        Novo cliente
+                                    </x-dropdown-link>
+                                    <x-dropdown-link :href="route('customer.index')">
+                                        Ver clientes
+                                    </x-dropdown-link>
+                                </x-slot>
+                            </x-dropdown>
+
+                        </div>
+
                 </div>
             </div>
 

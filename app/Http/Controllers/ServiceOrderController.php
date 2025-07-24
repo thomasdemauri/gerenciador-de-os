@@ -20,7 +20,8 @@ class ServiceOrderController extends Controller
 {
     public function create()
     {
-        $customers = Customer::all();
+        $user = Auth::user();
+        $customers = Customer::where('user_id', $user->id)->get();
         return view('service-order.create', [
             'customers' => $customers
         ]);
@@ -233,7 +234,8 @@ class ServiceOrderController extends Controller
     public function edit(ServiceOrder $order)
     {
         $order->load(['handymanServices', 'products', 'customer']);
-        $customers = Customer::all();
+        $user = Auth::user();
+        $customers = Customer::where('user_id', $user->id)->get();
 
         $order->data_os = Carbon::parse($order->data_os)->format('Y-m-d');
 

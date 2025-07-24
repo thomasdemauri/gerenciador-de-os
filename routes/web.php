@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Reports\ReportsPerClientController;
 use App\Http\Controllers\ServiceOrderController;
+use App\Models\ServiceOrder;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -36,6 +38,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/customers/{customer}', [CustomerController::class, 'delete'])->name('customer.delete');
     Route::get('/customers', [CustomerController::class, 'create'])->name('customer.create');
     Route::post('/customers', [CustomerController::class, 'store'])->name('customer.store');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/reports/client', [ReportsPerClientController::class, 'index'])->name('reports.client');
+    Route::get('/reports/download-report-per-client', [ReportsPerClientController::class, 'generateReport'])->name('reports.download-report-per-client');
+    Route::get('/reports/month', function () {})->name('reports.month');
 });
 
 require __DIR__.'/auth.php';

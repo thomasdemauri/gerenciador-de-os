@@ -14,7 +14,9 @@ class HandymanService extends Model
     protected $fillable = [
         'service_order_id',
         'description',
-        'price'
+        'quantity',
+        'unit_price',
+        'total_price'
     ];
 
     public function orderService()

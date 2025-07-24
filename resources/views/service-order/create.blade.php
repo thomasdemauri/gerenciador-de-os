@@ -16,14 +16,18 @@
                 <h3 class="text-lg font-semibold text-gray-800">Serviços<span class="ml-2 text-sm text-slate-400 xg:hidden">Digite o serviço e o valor e então clique em adicionar</span></h3>
                 <div class="flex space-x-2 mb-2">
                     <input type="text" id="new-service-name" placeholder="Serviço" class="flex-1 border-gray-300 rounded-md shadow-sm px-2 py-1">
-                    <input type="number" id="new-service-value" placeholder="Valor" step="0.01" class="w-32 border-gray-300 rounded-md shadow-sm px-2 py-1">
+                    <input type="number" id="new-service-qty" placeholder="Qtd" step="1" class="w-24 border-gray-300 rounded-md shadow-sm px-2 py-1">
+                    <input type="number" id="new-service-price" placeholder="Valor Unit." step="0.01" class="w-32 border-gray-300 rounded-md shadow-sm px-2 py-1">
+                    <input type="number" id="new-service-total-price" placeholder="Valor" step="0.01" class="w-32 border-gray-300 rounded-md shadow-sm px-2 py-1">
                     <button type="button" id="btn-add-service" class="bg-green-500 text-white px-4 py-1 rounded">Adicionar</button>
                 </div>
                 <table id="services-table" class="min-w-full table-auto border border-gray-300">
                     <thead class="bg-gray-200 text-left text-sm text-gray-700">
                     <tr>
                         <th class="px-4 py-2 border-b">Serviço</th>
-                        <th class="px-4 py-2 border-b">Valor</th>
+                        <th class="px-4 py-2 border-b">Qtd</th>
+                        <th class="px-4 py-2 border-b">Valor Unit.</th>
+                        <th class="px-4 py-2 border-b">Total</th>
                         <th class="px-4 py-2 border-b w-24">Ações</th>
                     </tr>
                     </thead>

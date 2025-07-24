@@ -26,14 +26,18 @@
                 <h3 class="text-lg font-semibold text-gray-800">Serviços</h3>
                 <div class="flex space-x-2 mb-2">
                     <input type="text" id="new-service-name" placeholder="Serviço" class="flex-1 border-gray-300 rounded-md shadow-sm px-2 py-1">
-                    <input type="number" id="new-service-value" placeholder="Valor" step="0.01" class="w-32 border-gray-300 rounded-md shadow-sm px-2 py-1">
+                    <input type="number" id="new-service-qty" placeholder="Qtd" step="1" class="w-24 border-gray-300 rounded-md shadow-sm px-2 py-1">
+                    <input type="number" id="new-service-price" placeholder="Valor Unit." step="0.01" class="w-32 border-gray-300 rounded-md shadow-sm px-2 py-1">
+                    <input type="number" id="new-service-total-price" placeholder="Valor" step="0.01" class="w-32 border-gray-300 rounded-md shadow-sm px-2 py-1">
                     <button type="button" id="btn-add-service" class="bg-green-500 text-white px-4 py-1 rounded">Adicionar</button>
                 </div>
                 <table id="services-table" class="min-w-full table-auto border border-gray-300">
                     <thead class="bg-gray-200 text-left text-sm text-gray-700">
                     <tr>
                         <th class="px-4 py-2 border-b">Serviço</th>
-                        <th class="px-4 py-2 border-b">Valor</th>
+                        <th class="px-4 py-2 border-b">Qtd</th>
+                        <th class="px-4 py-2 border-b">Valor Unit.</th>
+                        <th class="px-4 py-2 border-b">Total</th>
                         <th class="px-4 py-2 border-b w-24">Ações</th>
                     </tr>
                     </thead>
@@ -41,19 +45,28 @@
                         @foreach($order->handymanServices as $index => $service)
                             <tr class="bg-white border-b">
                                 <td>
-                                    <input type="hidden" name="services[{{$index}}][id]" value="{{$service->id}}">
-                                    <input type="text" name="services[{{$index}}][name]" value="{{$service->description}}"
-                                           class="w-full border-gray-300 rounded-md shadow-sm px-2 py-1" readonly
+                                    <input type="text" name="services[{{ $index }}][name]" value="{{ $service->description }}"
+                                           class="service-name-row w-full border-gray-300 rounded-md shadow-sm px-2 py-1" readonly
                                     >
                                 </td>
                                 <td>
-                                    <input type="number" name="services[{{$index}}][price]" value="{{$service->price}}"
-                                           class="service-price-row w-full border-gray-300 rounded-md shadow-sm px-2 py-1" readonly
+                                    <input type="number" name="services[{{ $index }}][quantity]" value="{{ $service->quantity }}"
+                                           class="service-quantity-row w-full border-gray-300 rounded-md shadow-sm px-2 py-1" readonly
+                                    >
+                                </td>
+                                <td>
+                                    <input type="number" name="services[{{ $index }}][unit_price]" value="{{ $service->unit_price }}"
+                                           class="service-unit-price-row w-full border-gray-300 rounded-md shadow-sm px-2 py-1" readonly
+                                    >
+                                </td>
+                                <td>
+                                    <input type="number" name="services[{{ $index }}][total_price]" value="{{ $service->total_price }}"
+                                           class="service-total-price-row w-full border-gray-300 rounded-md shadow-sm px-2 py-1" readonly
                                     >
                                 </td>
                                 <td class="flex">
+                                    <button type="button" class="btn-edit-service-row ml-2 mr-2 text-blue-500">Alterar</button>
                                     <button type="button" class="btn-remove-row ml-2 text-red-500">Excluir</button>
-                                    <button type="button" class="btn-edit-product-row ml-2 mr-2 text-blue-500">Alterar</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -106,8 +119,8 @@
                                     >
                                 </td>
                                 <td class="flex">
-                                    <button type="button" class="btn-remove-row ml-2 text-red-500">Excluir</button>
                                     <button type="button" class="btn-edit-product-row ml-2 mr-2 text-blue-500">Alterar</button>
+                                    <button type="button" class="btn-remove-row ml-2 text-red-500">Excluir</button>
                                 </td>
                             </tr>
                         @endforeach

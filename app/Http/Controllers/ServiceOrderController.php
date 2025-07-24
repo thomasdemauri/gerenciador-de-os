@@ -92,7 +92,9 @@ class ServiceOrderController extends Controller
 
                         $order->handymanServices()->create([
                             'description' => $service['name'],
-                            'price' => $service['price']
+                            'quantity' => $service['quantity'],
+                            'unit_price' => $service['unit_price'],
+                            'total_price' => $service['total_price']
                         ]);
 
                     } else {
@@ -100,7 +102,9 @@ class ServiceOrderController extends Controller
                         $handymanService = HandymanService::find($service['id']);
                         $handymanService->update([
                             'description' => $service['name'],
-                            'price' => $service['price']
+                            'quantity' => $service['quantity'],
+                            'unit_price' => $service['unit_price'],
+                            'total_price' => $service['total_price']
                         ]);
 
                     }
@@ -205,7 +209,9 @@ class ServiceOrderController extends Controller
             foreach ($services as $service) {
                 $order->handymanServices()->create([
                     'description' => $service['name'],
-                    'price' => $service['price']
+                    'quantity' => $service['quantity'],
+                    'unit_price' => $service['unit_price'],
+                    'total_price' => $service['total_price']
                 ]);
             }
 

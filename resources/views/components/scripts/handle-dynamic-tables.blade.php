@@ -8,8 +8,9 @@
     let totalProductPrice = 0;
 
     // Constroi o html da linha e adiciona
-    function buildRowService(name, price)
+    function buildRowService(name, quantity, unitPrice, totalPrice)
     {
+        console.log(quantity)
         let row = `
 <tr class="bg-white border-b">
     <td>
@@ -18,8 +19,18 @@
         >
     </td>
     <td>
-        <input type="number" name="services[${serviceIndex}][price]" value="${price}"
-            class="service-price-row w-full border-gray-300 rounded-md shadow-sm px-2 py-1" readonly
+        <input type="number" name="services[${serviceIndex}][quantity]" value="${quantity}"
+            class="service-quantity-row w-full border-gray-300 rounded-md shadow-sm px-2 py-1" readonly
+        >
+    </td>
+    <td>
+        <input type="number" name="services[${serviceIndex}][unit_price]" value="${unitPrice}"
+            class="service-unit-price-row w-full border-gray-300 rounded-md shadow-sm px-2 py-1" readonly
+        >
+    </td>
+    <td>
+        <input type="number" name="services[${serviceIndex}][total_price]" value="${totalPrice}"
+            class="service-total-price-row w-full border-gray-300 rounded-md shadow-sm px-2 py-1" readonly
         >
     </td>
     <td class="flex">
@@ -37,20 +48,34 @@
     function addServiceRowTable()
     {
         const inputServiceName = $('#new-service-name');
-        const inputServicePrice = $('#new-service-value');
+        const inputServiceQuantity = $('#new-service-qty');
+        const inputUnitPrice = $('#new-service-price');
+        const inputServiceTotalPrice = $('#new-service-total-price');
 
         const serviceName = inputServiceName.val() || '';
-        const serviceValue = Number(inputServicePrice.val()) || '';
+        const serviceQuantity =  Number(inputServiceQuantity.val()) || '';
+        const serviceUnitPrice = Number(inputUnitPrice.val()) || '';
+        const serviceTotalPrice = Number(inputServiceTotalPrice.val()) || '';
 
-        if (serviceValue === '' || serviceName === '') {
+        if (serviceName === '' || serviceQuantity === '' || serviceUnitPrice === '' || serviceTotalPrice === '') {
+
             alert('Preencha corretamente para adicionar!');
+
         } else {
-            buildRowService(serviceName, serviceValue.toFixed(2));
+
+            buildRowService(
+                serviceName,
+                serviceQuantity.toFixed(2),
+                serviceUnitPrice.toFixed(2),
+                serviceTotalPrice.toFixed(2),
+            );
 
         }
 
         inputServiceName.val('');
-        inputServicePrice.val('');
+        inputServiceQuantity.val('');
+        inputUnitPrice.val('');
+        inputServiceTotalPrice.val('');
 
     }
 
@@ -148,7 +173,7 @@
     // Soma servicos e produtos
     function sumProductAndServicesTotals()
     {
-        totalServicePrice = calculateTotalColumnByClass('.service-price-row');
+        totalServicePrice = calculateTotalColumnByClass('.service-total-price-row');
         totalProductPrice = calculateTotalColumnByClass('.product-total-price-row');
 
         $('#total-services').val(totalServicePrice.toFixed(2)).trigger('input');
@@ -174,7 +199,7 @@
             removeRowTable($(this));
         });
 
-        // Formata o valor total do produto a ser adicionado com duas casas decimais
+        // Formata o valor total do PRODUTO a ser adicionado com duas casas decimais
         $(document).on('input', '#new-product-price, #new-product-qty', function () {
 
             const qty = Number($('#new-product-qty').val()) || 0;
@@ -185,6 +210,17 @@
 
         });
 
+        // Formata o valor total do SERVIÇO a ser adicionado com duas casas decimais
+        $(document).on('input', '#new-service-qty, #new-service-price', function () {
+
+            const qty = Number($('#new-service-qty').val()) || 0;
+            const price = Number($('#new-service-price').val()) || 0;
+            const totalPrice = qty * price;
+
+            $('#new-service-total-price').val(totalPrice.toFixed(2));
+
+        });
+
         // Atualiza total de produtos e serviços
         $(document).on('click', '#btn-add-service, #btn-add-product, .btn-remove-row', function () {
 
@@ -192,7 +228,7 @@
 
         });
 
-        // Calcula o total
+        // Calcula o total da OS (produtos + servicos - descontos)
         $(document).on('input', '#total-services, #total-products, #discount', function () {
             services = Number($('#total-services').val() || 0);
             products = Number($('#total-products').val() || 0);
@@ -210,34 +246,44 @@
             let tr = $(this).closest('tr');
 
             let nameInput = tr.find('.service-name-row');
-            let priceInput = tr.find('.service-price-row');
+            let quantityInput = tr.find('.service-quantity-row');
+            let unitPriceInput = tr.find('.service-unit-price-row');
+
             nameInput.removeAttr('readonly');
-            priceInput.removeAttr('readonly');
+            quantityInput.removeAttr('readonly');
+            unitPriceInput.removeAttr('readonly');
 
             let button = tr.find('.btn-edit-service-row');
             button.text('Salvar');
             button.removeClass('text-blue-500');
             button.addClass('text-green-500 btn-save-service-row');
+
         });
 
-        // Desativa linha da tabela serviços do modo de edição
+        // SALVA linha da tabela serviços do modo de edição
         $(document).on('click', '.btn-save-service-row', function () {
 
             let tr = $(this).closest('tr');
 
             let nameInput = tr.find('.service-name-row');
-            let priceInput = tr.find('.service-price-row');
+            let quantityInput = tr.find('.service-quantity-row');
+            let unitPriceInput = tr.find('.service-unit-price-row');
 
-            if (nameInput.val() === '' || priceInput.val() === '') {
+            if (nameInput.val() === '' || quantityInput.val() === '' || unitPriceInput.val() === '') {
+
                 alert('Não deixe nenhum campo em branco!');
+
             } else {
+
                 nameInput.attr('readonly', true);
-                priceInput.attr('readonly', true);
+                quantityInput.attr('readonly', true);
+                unitPriceInput.attr('readonly', true);
 
                 let button = tr.find('.btn-edit-service-row');
                 button.text('Editar');
                 button.removeClass('text-green-500 btn-save-service-row');
                 button.addClass('text-blue-500');
+
             }
         });
 
@@ -261,7 +307,7 @@
             button.addClass('text-green-500 btn-save-product-row');
         });
 
-        // Desativa linha da tabela produtos do modo de edição
+        // SALVA linha da tabela produtos do modo de edição
         $(document).on('click', '.btn-save-product-row', function () {
 
             let tr = $(this).closest('tr');
@@ -271,8 +317,11 @@
             let unitPriceInput = tr.find('.unit-price-product-row');;
 
             if (descriptionInput.val() === '' || quantityInput.val() === '' || unitPriceInput === '') {
+
                 alert('Não deixe nenhum campo em branco!');
+
             } else {
+
                 descriptionInput.attr('readonly', true);
                 quantityInput.attr('readonly', true);
                 unitPriceInput.attr('readonly', true);
@@ -281,12 +330,12 @@
                 button.text('Editar');
                 button.removeClass('text-green-500 btn-save-product-row');
                 button.addClass('text-blue-500');
-            }
 
+            }
         });
 
-        // Atualiza preço da linha atual da tabela de produtos
-        $(document).on('input', '.quantity-product-row, .unit-price-product-row, .service-price-row', function () {
+        // Atualiza preço da linha atual da tabela de produtos caso usuário edite
+        $(document).on('input', '.quantity-product-row, .unit-price-product-row', function () {
 
             let tr = $(this).closest('tr');
 
@@ -301,11 +350,31 @@
             sumProductAndServicesTotals();
         })
 
-        // Formata linhas numericas das tabelas para duas casas decimais ao perder o foco
-        $(document).on('change', '.service-price-row, .quantity-product-row, .unit-price-product-row', function () {
-            let value = Number($(this).val() || 0);
-            $(this).val(value.toFixed(2));
+        // Atualiza preço da linha atual da tabela de serviços caso usuário edite
+        $(document).on('input', '.service-quantity-row, .service-unit-price-row', function () {
+
+            let tr = $(this).closest('tr');
+
+            let quantity = Number(tr.find('.service-quantity-row').val() || 0);
+            let unitPrice = Number(tr.find('.service-unit-price-row').val() || 0);
+            let totalPriceRow = tr.find('.service-total-price-row');
+
+            let total = unitPrice * quantity;
+            totalPriceRow.val(total.toFixed(2))
+
+            sumProductAndServicesTotals();
         })
+
+        // Formata linhas numericas das tabelas para duas casas decimais ao perder o foco
+        $(document).on('change',
+            '.service-price-row, .quantity-product-row, .unit-price-product-row,' +
+            '.service-quantity-row, .service-unit-price-row',
+            function () {
+                let value = Number($(this).val() || 0);
+                $(this).val(value.toFixed(2));
+            }
+        );
+
 
     });
 </script>

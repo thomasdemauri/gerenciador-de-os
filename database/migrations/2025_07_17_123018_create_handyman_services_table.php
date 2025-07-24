@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('service_order_id')->constrained('service_orders')->onDelete('cascade');
             $table->string('description');
-            $table->string('price');
+            $table->integer('quantity');
+            $table->decimal('unit_price');
+            $table->string('total_price');
             $table->timestamps();
         });
     }

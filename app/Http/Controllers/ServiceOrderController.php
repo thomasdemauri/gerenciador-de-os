@@ -153,13 +153,12 @@ class ServiceOrderController extends Controller
     {
         $user = Auth::user();
 
-//        $orders = ServiceOrder::with('customer')->where('user_id', $user->id)->get();
         $orders = QueryBuilder::for(ServiceOrder::class)
             ->allowedFilters([
                 AllowedFilter::custom('customer', new CustomerNameFilter),
                 AllowedFilter::exact('status'),
                 AllowedFilter::partial('vehicle'),
-                AllowedFilter::custom('data', new DataOsFilter()),
+                AllowedFilter::custom('date', new DataOsFilter()),
             ])
             ->where('user_id', $user->id)
             ->with('customer')

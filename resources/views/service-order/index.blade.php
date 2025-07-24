@@ -8,7 +8,7 @@
                 {{-- Nome do cliente --}}
                 <div class="col-span-3 mt-4">
                     <label for="customer_name" class="block text-sm font-medium text-gray-700">Filtrar por nome ou apelido</label>
-                    <input type="text" id="customer_name" name="filter[customer]"
+                    <input type="text" id="customer_name" name="filter[customer]" placeholder="João da Silva"
                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                            value="{{ request('filter.customer') }}"
                     >
@@ -17,22 +17,31 @@
                 {{-- Veiculo --}}
                 <div class="col-span-2 mt-4">
                     <label for="vehicle" class="block text-sm font-medium text-gray-700">Filtrar por veículo</label>
-                    <input type="text" id="vehicle" name="filter[vehicle]" value="{{ request('filter.vehicle', '') }}"
+                    <input type="text" id="vehicle" name="filter[vehicle]"  placeholder="ASH-9E14"
+                           value="{{ request('filter.vehicle', '') }}"
                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                     >
                 </div>
 
-                {{-- Data --}}
+                {{-- Data inicio --}}
                 <div class="col-span-2 mt-4">
-                    <label for="data_os" class="block text-sm font-medium text-gray-700">Filtrar por data</label>
-                    <input type="text" id="data_os" name="filter[data]"
-                           value="{{ request('filter.data', '')}}"
+                    <label for="start_date" class="block text-sm font-medium text-gray-700">Data inicial</label>
+                    <input type="text" id="start_date" name="filter[date][start_date]" placeholder="01/05/2025"
+                           value="{{ request('filter.date.start_date', '')}}"  x-data x-mask="99/99/9999"
+                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    >
+                </div>
+                {{-- Data fim --}}
+                <div class="col-span-2 mt-4">
+                    <label for="end_date" class="block text-sm font-medium text-gray-700">Data final</label>
+                    <input type="text" id="end_date" name="filter[date][end_date]" placeholder="30/05/2025"
+                           value="{{ request('filter.date.end_date', '')}}" x-data x-mask="99/99/9999"
                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     >
                 </div>
 
                 {{-- Situação da ordem de serviço --}}
-                <div class="col-span-4 mt-4">
+                <div class="col-span-3 mt-4">
                     <label class="block text-sm font-medium text-gray-700 mb-1">Situação da O.S</label>
                     <div class="flex flex-wrap gap-4 pt-2">
                         @foreach(\App\Http\Enums\ServiceOrderStatusEnum::values() as $status)

@@ -36,12 +36,19 @@ class ServiceOrderController extends Controller
         // com os ids vindo da request. Se estiver faltando algum siginifica
         // que o usuário removeu algum que já existia.
         $allServicesIdsBeforeUpdate = $order->handymanServices->pluck('id')->toArray();
-        $servicesIdsFromRequest = array_column($services, 'id');
-        $deletedServicesIds = array_diff($allServicesIdsBeforeUpdate, $servicesIdsFromRequest);
+
+        $deletedServicesIds = [];
+        if ($services) {
+            $servicesIdsFromRequest = array_column($services, 'id');
+            $deletedServicesIds = array_diff($allServicesIdsBeforeUpdate, $servicesIdsFromRequest);
+        }
 
         $allProductsIdsBeforeUpdate = $order->products->pluck('id')->toArray();
-        $productsIdsFromRequest = array_column($products, 'id');
-        $deletedProductsIds = array_diff($allProductsIdsBeforeUpdate, $productsIdsFromRequest);
+        $deletedProductsIds = [];
+        if ($products) {
+            $productsIdsFromRequest = array_column($products, 'id');
+            $deletedProductsIds = array_diff($allProductsIdsBeforeUpdate, $productsIdsFromRequest);
+        }
 
 
         try {
@@ -54,6 +61,7 @@ class ServiceOrderController extends Controller
                 'total_products' => $request->total_products,
                 'discount' => $request->discount,
                 'total_so' => $request->total_so,
+                'status' => $request->status,
                 'data_os' => Carbon::parse($request->data_os)->format('Y-m-d'),
                 'observation' => $request->observation
             ]);
@@ -155,6 +163,7 @@ class ServiceOrderController extends Controller
 
     public function store(Request $request)
     {
+//        dd($request);
         $request->validate([
             'customer_id' => ['exists:customers,id']
         ]);
@@ -174,6 +183,7 @@ class ServiceOrderController extends Controller
                 'total_products' => $request->total_products,
                 'discount' => $request->discount,
                 'total_so' => $request->total_so,
+                'status' => $request->status,
                 'data_os' => Carbon::parse($request->data_os)->format('Y-m-d'),
                 'observation' => $request->observation
             ]);

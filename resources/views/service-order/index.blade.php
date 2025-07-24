@@ -10,6 +10,7 @@
                     <th class="px-4 py-2 text-left text-sm font-medium text-gray-700 border-b">Cliente</th>
                     <th class="px-4 py-2 text-left text-sm font-medium text-gray-700 border-b">Veículo</th>
                     <th class="px-4 py-2 text-left text-sm font-medium text-gray-700 border-b">Valor</th>
+                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-700 border-b">Status</th>
                     <th class="px-4 py-2 text-left text-sm font-medium text-gray-700 border-b">Ações</th>
                 </tr>
                 </thead>
@@ -21,8 +22,9 @@
                         <td class="px-4 py-2 text-sm text-gray-800 border-b">{{$order->customer->full_name}}</td>
                         <td class="px-4 py-2 text-sm text-gray-800 border-b">{{$order->vehicle}}</td>
                         <td class="px-4 py-2 text-sm text-gray-800 border-b">R$ {{number_format($order->total_so, 2, ',', '.') }}</td>
+                        <td class="px-4 py-2 text-sm text-gray-800 border-b">{{ $order->status  }}</td>
                         <td class="px-4 py-2 text-sm text-gray-800 border-b">
-                            <a href="{{ route('service.download-order-report', ['order' => $order->id])  }}" class="mr-2 hover:underline text-yellow-500">
+                            <a href="{{ route('service.download-order-report', ['order' => $order->id])  }}" class="mr-2 hover:underline text-gray-800-500">
                                 Imprimir
                             </a>
                             <a href="{{ route('service.edit', ['order' => $order->id]) }}" class="mr-2 text-blue-600 hover:underline">

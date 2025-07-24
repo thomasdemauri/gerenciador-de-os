@@ -19,43 +19,7 @@
             @csrf
             @method('PUT')
 
-            <!-- Linha 1: Cliente, Data, Veículo -->
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-2">
-
-                <div class="col-span-2">
-                    <label for="id" class="block text-sm font-medium text-gray-700">Código</label>
-                    <input type="text" id="id" name="id"  value="{{$order->id}}" readonly
-                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                    >
-                </div>
-                <div class="col-span-4">
-                    <label for="customer" class="block text-sm font-medium text-gray-700">Cliente</label>
-                    <select id="customer" name="customer_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                        <option value="">Selecione um cliente</option>
-                        @foreach ($customers as $customer)
-                            <option value="{{ $customer->id }}"
-                                {{$order->customer->id === $customer->id ? 'selected' : ''}}
-                            >
-                                {{ $customer->full_name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="col-span-3">
-                    <label for="created_at" class="block text-sm font-medium text-gray-700">Data</label>
-                    <input type="date" id="created_at" name="data_os" value="{{$order->data_os}}"
-                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                    >
-                </div>
-
-                <div class="col-span-3">
-                    <label for="vehicle" class="block text-sm font-medium text-gray-700">Veículo</label>
-                    <input type="text" id="vehicle" name="vehicle" value="{{$order->vehicle}}"
-                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                    >
-                </div>
-            </div>
+            <x-basic-info-order :customers="$customers" :order="$order"/>
 
             <!-- Serviços -->
             <div class="mt-6">

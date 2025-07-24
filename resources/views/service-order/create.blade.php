@@ -9,30 +9,7 @@
         <form id="os-form" action="{{ route('service.store') }}" method="POST" class="space-y-6">
             @csrf
 
-            <!-- Linha 1: Cliente, Data, Veículo -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                    <label for="customer" class="block text-sm font-medium text-gray-700">Cliente</label>
-                    <select id="customer" name="customer_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                        <option value="">Selecione um cliente</option>
-                        @foreach ($customers as $customer)
-                            <option value="{{ $customer->id }}">{{ $customer->full_name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div>
-                    <label for="created_at" class="block text-sm font-medium text-gray-700">Data</label>
-                    <input type="date" id="created_at" name="data_os" value="{{\Carbon\Carbon::now()->format('Y-m-d')}}"
-                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                    >
-                </div>
-
-                <div>
-                    <label for="vehicle" class="block text-sm font-medium text-gray-700">Veículo</label>
-                    <input type="text" id="vehicle" name="vehicle" placeholder="Digite o veículo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                </div>
-            </div>
+            <x-basic-info-order :customers="$customers"/>
 
             <!-- Serviços -->
             <div class="mt-6">

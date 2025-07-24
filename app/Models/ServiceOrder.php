@@ -22,6 +22,7 @@ class ServiceOrder extends Model
         'total_products',
         'discount',
         'total_so',
+        'status',
         'data_os',
         'observation'
     ];

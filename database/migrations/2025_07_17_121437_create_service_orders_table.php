@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Enums\ServiceOrderStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,6 +23,8 @@ return new class extends Migration
             $table->decimal('total_so')->default(0);
             $table->datetime('data_os');
             $table->text('observation')->nullable();
+            // Status da ordem de serviço
+            $table->enum('status', ServiceOrderStatusEnum::values())->default(ServiceOrderStatusEnum::OPEN);
 
             $table->timestamps();
         });

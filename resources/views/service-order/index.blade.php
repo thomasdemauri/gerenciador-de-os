@@ -94,7 +94,9 @@
                             <a href="{{ route('service.download-order-report', ['order' => $order->id])  }}" class="mr-2 hover:underline text-gray-800-500">
                                 Imprimir
                             </a>
-                            <a href="{{ route('service.edit', ['order' => $order->id]) }}" class="mr-2 text-blue-600 hover:underline">
+                            <a href="{{ route('service.edit', ['order' => $order->id]) }}"
+                               class="mr-2 text-blue-600 hover:underline"
+                            >
                                 Editar
                             </a>
 

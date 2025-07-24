@@ -14,7 +14,7 @@
             <!-- Serviços -->
             <div class="mt-6">
                 <h3 class="text-lg font-semibold text-gray-800">Serviços<span class="ml-2 text-sm text-slate-400 xg:hidden">Digite o serviço e o valor e então clique em adicionar</span></h3>
-                <div class="flex space-x-2 mb-2">
+                <div class="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0 mb-2">
                     <input type="text" id="new-service-name" placeholder="Serviço" class="flex-1 border-gray-300 rounded-md shadow-sm px-2 py-1">
                     <input type="number" id="new-service-qty" placeholder="Qtd" step="1" class="w-24 border-gray-300 rounded-md shadow-sm px-2 py-1">
                     <input type="number" id="new-service-price" placeholder="Valor Unit." step="0.01" class="w-32 border-gray-300 rounded-md shadow-sm px-2 py-1">
@@ -38,7 +38,7 @@
             <!-- Produtos -->
             <div class="mt-8">
                 <h3 class="text-lg font-semibold text-gray-800">Produtos<span class="ml-2 text-sm text-slate-400 xg:hidden">Digite o produto, quantidade e o valor unitário e então clique em adicionar</span></h3>
-                <div class="flex space-x-2 mb-2">
+                <div class="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0 mb-2">
                     <input type="text" id="new-product-name" placeholder="Descrição" class="flex-1 border-gray-300 rounded-md shadow-sm px-2 py-1">
                     <input type="number" id="new-product-qty" placeholder="Qtd" step="1" class="w-24 border-gray-300 rounded-md shadow-sm px-2 py-1">
                     <input type="number" id="new-product-price" placeholder="Valor Unit." step="0.01" class="w-32 border-gray-300 rounded-md shadow-sm px-2 py-1">

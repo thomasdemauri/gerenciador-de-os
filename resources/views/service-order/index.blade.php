@@ -1,9 +1,10 @@
 <x-app-layout>
 
+    {{-- Filtros de consulta --}}
     <div class="p-4 m-4 bg-white ">
         <h3 class="font-bold">Filtros<span class="text-sm text-gray-500 ml-3">Você pode usar mais de um filtro por consulta</span></h3>
         <form action="{{route('service.index')}}" method="get">
-            <div class="grid grid-cols-12 gap-5">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
 
                 {{-- Nome do cliente --}}
                 <div class="col-span-3 mt-4">

@@ -75,10 +75,10 @@
                                 </x-slot>
 
                                 <x-slot name="content">
-                                    <x-dropdown-link :href="route('reports.client')">
+                                    <x-dropdown-link :href="route('reports.client.index')">
                                         O.S por cliente
                                     </x-dropdown-link>
-                                    <x-dropdown-link :href="route('reports.month')">
+                                    <x-dropdown-link :href="route('reports.month.index')">
                                         Vendas por mês
                                     </x-dropdown-link>
                                 </x-slot>

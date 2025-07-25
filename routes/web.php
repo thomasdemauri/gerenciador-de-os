@@ -41,9 +41,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/reports/client', [ReportsPerClientController::class, 'index'])->name('reports.client');
+    Route::get('/reports/client', [ReportsPerClientController::class, 'index'])->name('reports.client.index');
     Route::get('/reports/download-report-per-client', [ReportsPerClientController::class, 'generateReport'])->name('reports.download-report-per-client');
-    Route::get('/reports/month', function () {})->name('reports.month');
+    Route::get('/reports/month', [ReportsPerClientController::class, 'configureReportPerMonth'])->name('reports.month.index');
+    Route::get('/reports/download-report-per-month', [ReportsPerClientController::class, 'downloadReportPerMonth'])->name('reports.download-report-per-month');
 });
 
 require __DIR__.'/auth.php';

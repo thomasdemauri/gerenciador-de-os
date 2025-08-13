@@ -27,10 +27,10 @@
 
     <!-- Dados da Empresa -->
     <div class="col-span-9 pl-4">
-        <h1 class="text-lg font-bold">Preto Motores</h1>
-        <p class="text-sm">Preto Motores LTDA</p>
-        <p class="text-sm">CNPJ: 15.329.731/0001-52</p>
-        <p class="text-sm">Contato: (16) 3342-9507 | contato@empresa.com</p>
+        <h1>Oficina LTDA</h1>
+        <p>Oficina</p>
+        <p>CNPJ: 00.000.0000/0000-00</p>
+        <p>Contato: (16) 3342-9507 | contato@empresa.com</p>
     </div>
 </div>
 

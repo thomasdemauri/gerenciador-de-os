@@ -148,9 +148,9 @@
             alt="Logo">
     </div>
     <div class="company-info">
-        <h1>Thomas Mauro</h1>
-        <p>Tom Lindinho LTDA</p>
-        <p>CNPJ: 15.329.731/0001-52</p>
+        <h1>Oficina LTDA</h1>
+        <p>Oficina</p>
+        <p>CNPJ: 00.000.0000/0000-00</p>
         <p>Contato: (16) 3342-9507 | contato@empresa.com</p>
     </div>
 </div>
